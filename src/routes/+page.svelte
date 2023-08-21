@@ -6,27 +6,47 @@
 		const data = await res.json();
 		console.log(data);
 	});
+	
+	let urlSolicitada = "";
+	let urlEncurtada = "";
 
-	function copiarTexto() {
-		// var element = document.getElementById("url")
-		// element.select();
-		// document.execCommand("copy");
-		// alert("O texto é: " + textoCopiado.value);
+	async function create() {
+		const Url = {
+			urlOriginal: urlSolicitada
+		}
+
+		console.log(JSON.stringify(Url))
+
+		const response = await fetch('http://localhost:8080/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Url)
+        });
+
+		const data = await response.json();
+        console.log(data);
+
+		urlEncurtada = data.urlEncurtada;
 	}
+
 </script>
 
 <section>
 	<h1>Encurtador de URL</h1>
-	<form method="post">
-		<input type="text" placeholder="Put your link here" name="url"/>
-		<button id="button" type="submit">Encurtar</button>
+	<form>
+		<input type="text" bind:value={urlSolicitada} placeholder="Put your link here" name="url"/>
+		<button id="button" type="submit" on:click={create}>Encurtar</button>
 	</form>
+	{#if urlEncurtada != ""}
 	<div class="response">
-		<span id="url">http://encurta.io/12412</span>
+		<span id="url">{urlEncurtada}</span>
 		<button class="bg">
 			<ion-icon name="copy-outline" />
 		</button>
 	</div>
+	{/if}
 </section>
 
 <style>

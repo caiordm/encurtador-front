@@ -2,7 +2,7 @@
 </header>
 <slot/>
 <footer>
-    <a href="#tes"><ion-icon name="logo-github"></ion-icon>GitHub</a>
+    <a href="https://github.com/caiordm/encurtador-de-link"><ion-icon name="logo-github"></ion-icon>GitHub</a>
 </footer>
 
 <style>
